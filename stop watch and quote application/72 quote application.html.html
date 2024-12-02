@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 150px;
+            background-color: #f4f4f4;
+        }
+
+        .quote-container {
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .quote-text {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        .quote-author {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quote-container">
+        <div class="quote-text" id="quote">"Welcome to the Quote App!"</div>
+        <div class="quote-author" id="author">- Developer</div>
+        <button class="btn" id="new-quote">New Quote</button>
+    </div>
+    <script>
+    
+        const quotes = [
+            { text: "Live as if you were to die tomorrow. Learn as if you were to live forever.", author: "Mahatma Gandhi" },
+            { text: "Progress should not come at the cost of cultural and moral degradation.", author: "Kaka Kalelkar" },
+            { text: "Even if there were a sword in the hands of everyone, it is willpower that establishes a government.", author: "Shivaji Maharaj" },
+            { text: "If you want to chance the way you feel, chance the way you give.", author: "Gaur Gopaldas" },
+            { text: "Excellence is a continuous process and not an accident.", author: "Dr.Abdul Kalam" },
+            { text: "I like the religion that teaches liberty, equality, and fraternity.", author: "B. R . Ambedkar" },
+            { text: "The size of the problem you overcome decides the height of success you will attain.", author: "Anand Munshi" }
+        ];
+
+      
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+
+            document.getElementById("quote").textContent = `"${quote.text}"`;
+            document.getElementById("author").textContent = `- ${quote.author}`;
+        }
+
+    
+        document.getElementById("new-quote").addEventListener("click", displayRandomQuote);
+
+   
+        window.onload = displayRandomQuote;
+
+    </script>
+</body>
+
+</html>

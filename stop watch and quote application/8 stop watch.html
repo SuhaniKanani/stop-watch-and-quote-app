@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .main{
+            height: 500px;
+            width: 350px;
+            background-color: #d8d8d8;
+            margin:  0 auto;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            flex-direction: column;
+        }
+
+        .round{
+            height: 260px;
+            width: 260px;
+            background-color: #3A1078;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .buttons{
+            height: 50px;
+            width: 70%;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .buttons > button{
+            padding: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            background-color: #3A1078;
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="round">
+           <h1 id="hours">00:</h1>
+           <h1 id="minutes">00:</h1>
+           <h1 id="seconds">00</h1>
+        </div>
+        <div class="buttons">
+            <button id="start">START</button>
+            <button id="stop">STOP</button>
+            <button id="reset">RESET</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(()=>{
+           
+            let hrs = $("#hours");
+            let seconds = $("#seconds");
+            let mins = $("#minutes");
+
+            let start = $("#start");
+            let stop = $("#stop");
+            let reset = $("#reset");
+
+            let timer = null; //states
+            let totalSecond = 0; //states
+
+            // Functio to format time
+
+            function formatTime(value){
+                return value < 10 ? `0${value}` : value;
+            }
+
+            // Function to update the timer
+
+            function updateTime(){
+                let hours = Math.floor(totalSecond / 3600);
+                let minutes = Math.floor(totalSecond % 3600 / 60);
+                let sec = totalSecond % 60;
+           
+                hrs.text(`${formatTime(hours)} :`);
+                mins.text(`${formatTime(minutes)} : `);
+                seconds.text(`${formatTime(sec)}`);
+
+            }
+
+            //buttons Logic
+
+            start.click(()=>{
+                if(!timer){
+                    timer =  setInterval(()=>{
+                        totalSecond++;
+                        updateTime();
+                    },1000)
+                }
+            });
+
+            // stop button logic
+
+            stop.click(()=>{
+                clearInterval(timer);
+               
+                timer = null;
+            });
+
+            // reset button logic
+
+            reset.click(()=>{
+                clearInterval(timer);
+                timer = null;
+
+                totalSecond = 0;
+                updateTime();
+            })
+           
+            updateTime();
+        })
+    </script>
+   
+</body>
+</html>
